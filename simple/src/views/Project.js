@@ -1,3 +1,5 @@
+import React from 'react'
+
 /*
 
     This page should be a break down of all a projects details
@@ -10,3 +12,13 @@
 
 
 */
+
+
+export default function(props){
+
+    return(
+        <div>
+            This is my Projects view
+        </div>
+    )
+}

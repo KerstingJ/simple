@@ -1,3 +1,5 @@
+import React from 'react'
+
 /*
 
     This should show all information about a client
@@ -11,3 +13,12 @@
     -list of current/upcoming projects
 
 */
+
+export default function(props){
+
+    return(
+        <div>
+            This is my client View
+        </div>
+    )
+}

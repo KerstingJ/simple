@@ -1,3 +1,5 @@
+import React from 'react'
+
 /* 
 
     This should be a contacts list like view.
@@ -6,3 +8,12 @@
         - and also give you the ability to expand into a view showing all information for that contact
 
 */
+
+export default function(props){
+
+    return(
+        <div>
+            This is my contacts View
+        </div>
+    )
+}

@@ -1,3 +1,5 @@
+import React from 'react'
+
 /*
 
     this should be an at a glance to invoices due.
@@ -14,3 +16,12 @@
     clicking on a job should link to the jobs page
 
 */
+
+export default function(props){
+
+    return(
+        <div>
+            This is my invoices View
+        </div>
+    )
+}

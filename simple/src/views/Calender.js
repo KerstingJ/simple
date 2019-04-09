@@ -1,3 +1,5 @@
+import React from 'react'
+
 /*
 
     Calender should be a list of upcoming jobs ordered by date
@@ -10,3 +12,13 @@
     this expansion should give the ability to link to the main job page
 
 */
+
+
+export default function(props){
+
+    return(
+        <div>
+            This is my Calender view
+        </div>
+    )
+}

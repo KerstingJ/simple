@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route } from 'react-router-dom';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+import Login from './views/Login.js'
+import Calender from './views/Calender.js'
+import Contacts from './views/Login.js'
+import Invoices from './views/Invoices.js'
+import Client from './views/Client.js'
+import Project from './views/Project.js'
+
+
+
+export default function(props){
+
+  return(
+    <div className="app">
+      <Route exact path="/" render={() => <Calender />} />
+      <Route path="/login" render={() => <Login />} />
+      <Route path="/contacts" render={() => <Contacts />} />
+      <Route path="/invoices" render={() => <Invoices />} />
+      <Route path="/client/:clientId" render={() => <Client />} />
+      <Route path="/project/:projectId" render={() => <Project />} />
+    </div>
+  )
 }
-
-export default App;
