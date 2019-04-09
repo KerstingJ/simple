@@ -1,0 +1,12 @@
+/*
+
+    This page should be a break down of all a projects details
+
+    should also link the the Client the project is for
+
+    i think to keep the app more versatile only a few fields should be standardized
+
+    then create a notes field that can support inline multimedia
+
+
+*/
