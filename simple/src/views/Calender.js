@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Header from '../components/Header.js'
+
 /*
 
     Calender should be a list of upcoming jobs ordered by date
@@ -18,6 +20,7 @@ export default function(props){
 
     return(
         <div>
+            <Header />
             This is my Calender view
         </div>
     )

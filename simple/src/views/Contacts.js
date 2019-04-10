@@ -13,7 +13,7 @@ export default function(props){
 
     return(
         <div>
-            This is my contacts View
+            <Header />
         </div>
     )
 }

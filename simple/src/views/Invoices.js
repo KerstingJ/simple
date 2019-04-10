@@ -21,6 +21,7 @@ export default function(props){
 
     return(
         <div>
+            <Header />
             This is my invoices View
         </div>
     )
