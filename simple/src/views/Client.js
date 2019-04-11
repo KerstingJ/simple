@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import styled from 'styled-components';
+
+import Header from '../components/Header'
 
 /*
 
@@ -18,6 +21,7 @@ export default function(props){
 
     return(
         <div>
+            <Header />
             This is my client View
         </div>
     )

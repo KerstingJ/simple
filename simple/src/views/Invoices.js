@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Header from '../components/Header'
 /*
 
     this should be an at a glance to invoices due.

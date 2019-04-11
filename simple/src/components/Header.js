@@ -11,7 +11,7 @@ export default function(props){
             {/* Nav */}
             <nav>
                 <NavLink to="/contacts">Contacts</NavLink>
-                <NavLink to="/">Calendar</NavLink>
+                <NavLink exact to="/">Calendar</NavLink>
                 <NavLink to="/invoices">Invoices</NavLink>
             </nav>
         </Header>

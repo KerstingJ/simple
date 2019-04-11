@@ -1,4 +1,8 @@
-import React from 'react'
+import React from 'react';
+import styled from 'styled-components';
+
+import Header from '../components/Header';
+import Contact from '../components/Contact';
 
 /* 
 
@@ -10,10 +14,19 @@ import React from 'react'
 */
 
 export default function(props){
+    const { clients } = props
 
     return(
         <div>
             <Header />
+            <Contacts>
+                {console.log(clients)}
+                {clients && clients.map(client => <Contact client={client} />)}
+            </Contacts>
         </div>
     )
 }
+
+const Contacts = styled.div`
+
+`
