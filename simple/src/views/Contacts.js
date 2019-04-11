@@ -28,5 +28,7 @@ export default function(props){
 }
 
 const Contacts = styled.div`
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
