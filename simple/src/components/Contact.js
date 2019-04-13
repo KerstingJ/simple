@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
-export default function(props){
+export default withRouter(function(props){
     const {client} = props;
     const [isToggled, setToggle] = useState(false);
 
@@ -29,12 +30,15 @@ export default function(props){
                 </div>
                 <button 
                     className="clientViewButton"
-                    onClick={event => event.preventDefault()}
+                    onClick={event => {
+                        event.preventDefault()
+                        props.history.push(`/client/${client.id}`)
+                    }}
                 >See More</button>
             </div>
         </Contact>
     )
-}
+})
 
 const Contact = styled.div`
     display: inline-flex;
@@ -43,7 +47,6 @@ const Contact = styled.div`
 
     padding: 15px;
     border-bottom: 1px solid black;
-    margin-bottom: 5px;
 
     width: 100%;
     max-width: 600px;

@@ -1,8 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import { connect } from "react-redux";
 
-import Header from '../components/Header';
-import Contact from '../components/Contact';
+import Header from "../components/Header";
+import Contact from "../components/Contact";
+
+import { getClients } from "../actions/clientActions";
 
 /* 
 
@@ -13,22 +16,43 @@ import Contact from '../components/Contact';
 
 */
 
-export default function(props){
-    const { clients } = props
+function ContactsView(props) {
+  const { clients } = props;
 
-    return(
-        <div>
-            <Header />
-            <Contacts>
-                {console.log(clients)}
-                {clients && clients.map(client => <Contact client={client} />)}
-            </Contacts>
-        </div>
-    )
+  useEffect(() => {
+    props.getClients();
+  }, []);
+
+  return (
+    <div>
+      <Header />
+      <Contacts>
+        {clients ? (
+          clients.map(client => <Contact key={client.id} client={client} />)
+        ) : (
+          <div>You dont have any clients\nWhy dont you add one!</div>
+        )}
+      </Contacts>
+    </div>
+  );
 }
 
 const Contacts = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const mstp = state => {
+  console.log(state);
+  return {
+    clients: state.clients.clients
+  };
+};
+
+export default connect(
+  mstp,
+  {
+    getClients
+  }
+)(ContactsView);

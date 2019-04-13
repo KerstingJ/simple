@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux'
+
 
 import Header from '../components/Header'
+import ClientInfo from '../components/ClientInfo';
 
 /*
 
@@ -12,17 +15,24 @@ import Header from '../components/Header'
     -phone
     -address
 
-    -list of previous projects
+    -list of previous projects / project quick view
     -list of current/upcoming projects
 
 */
+function ClientView(props){
 
-export default function(props){
+    console.log(props)
 
     return(
         <div>
             <Header />
-            This is my client View
+            <div>
+                <ClientInfo client={props.client} />
+            </div>
         </div>
     )
 }
+
+export default connect(null, {
+
+})(ClientView)

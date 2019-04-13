@@ -1,5 +1,6 @@
 const emptyClient = {
     id: 1,
+    thumbnailUrl: '',
     name: '',
     phone: '',
     email: '',
