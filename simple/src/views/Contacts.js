@@ -46,7 +46,7 @@ const Contacts = styled.div`
 const mstp = state => {
   console.log(state);
   return {
-    clients: state.clients.clients
+    clients: state.clients.clientsList
   };
 };
 

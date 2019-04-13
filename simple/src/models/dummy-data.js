@@ -11,7 +11,7 @@ export const clients = [
     {
         id: 2,
         name: "jane does",
-        thumbnailUrl: 'jpg',
+        thumbnailUrl: '/imgs/defaultThumb.jpg',
         email: "janed@mail.com",
         phone: "4321567",
         notes: "No Notes",
@@ -20,7 +20,7 @@ export const clients = [
     {
         id: 3,
         name: "danny jones",
-        thumbnailUrl: 'jpg',
+        thumbnailUrl: '/imgs/defaultThumb.jpg',
         email: "danjs@mail.com",
         phone: "1543267",
         notes: "No Notes",
@@ -34,8 +34,9 @@ export const projects = [
 ]
 
 export function getClientById(id){
+    console.log("inside getClient", id)
     return {
-        ...clients.find(client => client.id === id),
+        ...clients.find(client => client.id == id),
         //projects: projects.filter(p => p.clientId = id)
     }
 }

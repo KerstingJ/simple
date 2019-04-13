@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
+import {getClientById} from '../actions/clientActions'
 
 import Header from '../components/Header'
 import ClientInfo from '../components/ClientInfo';
@@ -20,19 +22,25 @@ import ClientInfo from '../components/ClientInfo';
 
 */
 function ClientView(props){
-
     console.log(props)
+
+    useEffect(()=>{
+        let clientId = props.match.params.clientId
+        props.getClientById(clientId)
+    }, [])
 
     return(
         <div>
             <Header />
             <div>
-                <ClientInfo client={props.client} />
+                {props.client ? <ClientInfo client={props.client} /> : <div>Loading</div>}
             </div>
         </div>
     )
 }
 
-export default connect(null, {
-
+export default connect(state => ({
+    client: state.clients.client
+}), {
+    getClientById
 })(ClientView)

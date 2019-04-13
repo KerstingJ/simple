@@ -2,45 +2,47 @@ import { clients as c, getClientById as getCById } from '../models/dummy-data'; 
 
 
 
-// GET_CLIENTS, GET_CLIENTS_SUCCESS, GET_CLIENTS_FAILURE
-export const GET_CLIENTS = "GET_CLIENTS"
-export const GET_CLIENTS_SUCCESS = "GET_CLIENTS_SUCCESS"
-export const GET_CLIENTS_FAILURE = "GET_CLIENTS_FAILURE"
+// GET_CLIENTS_LIST, GET_CLIENTS_LIST_SUCCESS, GET_CLIENTS_LIST_FAILURE
+export const GET_CLIENTS_LIST = "GET_CLIENTS_LIST"
+export const GET_CLIENTS_LIST_SUCCESS = "GET_CLIENTS_LIST_SUCCESS"
+export const GET_CLIENTS_LIST_FAILURE = "GET_CLIENTS_LIST_FAILURE"
 
 export const getClients = () => dispatch => {
     dispatch({
-        type: GET_CLIENTS
+        type: GET_CLIENTS_LIST
     })
 
     // need to make a request to DB here and put inside then catch
     dispatch({
-        type: GET_CLIENTS_SUCCESS,
+        type: GET_CLIENTS_LIST_SUCCESS,
         payload: c
     })
 
     // dispatch({
-    //     type: GET_CLIENTS_FAILURE,
+    //     type: GET_CLIENTS_LIST_FAILURE,
     //     payload: "error message"
     // })
 }
 
-// GET_CLIENT_BY_ID, GET_CLIENT_BY_ID_SUCCESS, GET_CLIENT_BY_ID_FAILURE
-export const GET_CLIENT_BY_ID = "GET_CLIENT_BY_ID"
-export const GET_CLIENT_BY_ID_SUCCESS = "GET_CLIENT_BY_ID_SUCCESS"
-export const GET_CLIENT_BY_ID_FAILURE = "GET_CLIENT_BY_ID_FAILURE"
+// GET_CLIENT, GET_CLIENT_SUCCESS, GET_CLIENT_FAILURE
+export const GET_CLIENT = "GET_CLIENT"
+export const GET_CLIENT_SUCCESS = "GET_CLIENT_SUCCESS"
+export const GET_CLIENT_FAILURE = "GET_CLIENT_FAILURE"
 
 export const getClientById = id => dispatch => {
     dispatch({
-        type: GET_CLIENT_BY_ID
+        type: GET_CLIENT
     })
 
+    console.log(getCById(id))
+
     dispatch({
-        type: GET_CLIENT_BY_ID_SUCCESS,
+        type: GET_CLIENT_SUCCESS,
         payload: getCById(id)
     })
 
     // dispatch({
-    //     type: GET_CLIENT_BY_ID_FAILURE,
+    //     type: GET_CLIENT_FAILURE,
     //     payload: "error message"
     // })
 }
