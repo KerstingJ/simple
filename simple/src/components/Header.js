@@ -8,40 +8,64 @@ export default withRouter(function(props){
     const pushHome = event => {
         console.log(props.history.push("/"))
     }
+
     return(
         <Header>
-            <h1 onClick={pushHome}>Simple</h1>
-            <nav>
-                <NavLink exact to="/">Home</NavLink>
-            </nav>
+            <div className="container">
+                <h1 onClick={pushHome}>Simple</h1>
+                <input type="search" placeholder="🔎"/>
+                <nav>
+                    <NavLink exact to="/">Home</NavLink>
+                    <NavLink to="/"><i className="fas fa-user"></i></NavLink>
+                </nav>
+            </div>
         </Header>
     )
 })
 
 const Header = styled.header`
     width: 100%;
-    min-height: 100px;
-    padding: 0 50px;
+    background: #4abdac;
+    color: white;
+    box-shadow: 0 0 2px black;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: fixed;
+    z-index: 2;
 
-    h1 {
-        padding: 10px 0;
-    }
+    .container {
+        padding: 0 50px;
+        max-width: 1000px;
+        margin: 0 auto;
 
-    nav {
-        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-        a {
-            display: block;
-            font-size: 2rem;
+        
+
+        h1 {
+            padding: 10px 0;
+            font-size: 2.4rem;
+        }
+
+        nav {
             height: 100%;
-            transition: .25s;
+            display: flex;
+            align-items: center;
 
-            &:hover {
-                border-bottom: 1px solid white;
+            a {
+                display: inline-block;
+                font-size: 2rem;
+                height: 100%;
+                transition: .25s;
+                border-bottom: 1px solid rgba(0,0,0,0);
+
+                margin-left: 25px;
+
+                &:hover {
+                    text-decoration: none;
+                    border-bottom: 1px solid white;
+                }
             }
         }
     }

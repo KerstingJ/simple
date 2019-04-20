@@ -9,8 +9,8 @@ import MainView from './views/MainView.js'
 export default function(props){
   return (
     <div className="App">
-      <Route path="/login" component={Login}/>
-      <Route path="/register" component={Login} register={true}/>
+      {/* <Route path="/login" component={Login}/>
+      <Route path="/register" component={Login} register={true}/> */}
       <Route exact path="/" component={MainView} />
     </div>
   );
