@@ -1,50 +1,48 @@
-import React from 'react'
-import styled from 'styled-components'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import styled from 'styled-components';
+import {NavLink, withRouter} from 'react-router-dom';
 
-export default function(props){
+import {theme} from '../config'
 
+export default withRouter(function(props){
+    const pushHome = event => {
+        console.log(props.history.push("/"))
+    }
     return(
         <Header>
-            {/* Logo */}
-            <h1>Simple</h1>
-            {/* Nav */}
+            <h1 onClick={pushHome}>Simple</h1>
             <nav>
-                <NavLink to="/contacts">Contacts</NavLink>
-                <NavLink exact to="/">Calendar</NavLink>
-                <NavLink to="/invoices">Invoices</NavLink>
+                <NavLink exact to="/">Home</NavLink>
             </nav>
         </Header>
     )
-}
+})
 
 const Header = styled.header`
-    height: 75px;
-
-    padding: 10px 30px;
-
-    box-shadow: 0px 2px 2px rgba(0,0,0,0.4);
+    width: 100%;
+    min-height: 100px;
+    padding: 0 50px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    nav a {
-        text-decoration: none;
-        color: darkgrey;
-        margin-left: 20px;
+    h1 {
+        padding: 10px 0;
+    }
 
-        &:first-child {
-            margin-left: 0;
-        }
+    nav {
+        height: 100%;
 
-        &:hover {
-            border-bottom: 2px solid darkgrey;
-        }
+        a {
+            display: block;
+            font-size: 2rem;
+            height: 100%;
+            transition: .25s;
 
-        &.active {
-            color: black;
-            border-bottom: 2px solid black;
+            &:hover {
+                border-bottom: 1px solid white;
+            }
         }
     }
 `

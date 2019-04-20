@@ -1,7 +1,6 @@
-import { combineReducers } from 'redux';
-import clientsReducer from './clientsReducer'
+import { combineReducers } from "redux";
+import loginReducer from './loginReducer';
 
 export default combineReducers({
-  // This is where my reducers will go when i get there
-  clients: clientsReducer
+  login: loginReducer
 });

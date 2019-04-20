@@ -1,57 +1,118 @@
-import React, {useState} from 'react'
-// this issss the login page!!!
+import React, {useState} from 'react';
+import styled from 'styled-components';
+import {connect} from 'react-redux';
+import {Link, Redirect} from 'react-router-dom'
 
-export default function(props){
+import { login as doLogin, register as doRegister} from '../actions/loginActions'
 
-    let [formFields, setFormFields] = useState({username: "", password: ""})
+export function LoginView(props){
+
+    if (props.isLoggingIn || props.isRegistering) {
+        return (<div>Validating</div>)
+    }
+    if (props.isLoggedIn) {
+        return <Redirect to="/" />
+    }
+    if (props.registerSuccesful && props.match.url.includes("register")){
+        return <Redirect to="/login" />
+    }
+
+    const [cred, setCred] = useState({
+        username: "",
+        password: "",
+        confirm: ""
+    })
+    const [error, setError] = useState("")
+
+    const register = props.match.url.includes('register')
 
     const handleInput = event => {
-        setFormFields({
-            ...formFields,
+        setCred({
+            ...cred,
             [event.target.name]: event.target.value
         })
     }
 
-    const validate = event => {
+    const loginSubmit = event => {
         event.preventDefault();
-        // this needs to eventually connect to a server where it can check if username exists
-        // also needs to be abe 
-
-        let username = formFields.username.trim();
-        let password = formFields.password.trim();
-
-        let isValidUsername = (username.length >= 3 && username.search(new RegExp('\\W')) < 1)
-        let isValidPassword = (password.length >= 8)
-        
-        setFormFields({
-            username: isValidUsername ? username : "",
-            password: isValidPassword ? password : ""
-        })
-
-        return (isValidUsername && isValidPassword)
+        props.doLogin(cred)
     }
 
-    return(
-        <div>
-            This is my Login View
-            {/* logo */}
-            {/* login form */}
-            <form onSubmit={(event) => {validate(event) && props.login()}}>
+    const registerSubmit = event => {
+        event.preventDefault();
+        
+        if (cred.password !== cred.confirm){
+            setError("Passwords do not match")
+            return
+        }
+
+        setError("")
+        let {confirm, ...rest} = cred;
+        props.doRegister(rest)
+    }
+
+    return (
+        <Login onSubmit={event => register ? registerSubmit(event) : loginSubmit(event)}>
+            <h1>{register ? "Register" : "Login"}</h1>
+            {props.registerSuccesful && <div className="prompt">Login with your newly Created Credentials!</div>}
+            {props.loginError && <div className="errorBox">{props.loginError}</div>}
+            {props.registerError && <div className="errorBox">{props.registerError}</div>}
+            {error && <div className="errorBox">{error}</div>}
+            <form>
                 <input
                     name="username"
-                    placeholder="Username"
-                    value={formFields.username}
-                    onChange={handleInput}
+                    value={cred.username}
+                    onChange={handleInput} 
                 />
                 <input
                     name="password"
-                    placeholder="Password"
-                    value={formFields.password}
-                    onChange={handleInput}
-                    type="password"
+                    type="text" // change to password
+                    value={cred.password}
+                    onChange={handleInput} 
                 />
-                <button type="submit">Login</button>
+                {register && (
+                    <input
+                        name="confirm"
+                        type="text" // change to password
+                        value={cred.confirm}
+                        onChange={handleInput} 
+                    />
+                )}
+                <button type="submit">{register ? "Register" : "Login"}</button>
             </form>
-        </div>
+            {register ? (
+                <div>Already have an Account?<Link to='/login'>Login in Here!</Link></div>
+            ) : (
+                <div>New to Party Planner?<Link to='/register'>Create an Account!</Link></div>
+            )}
+        </Login>
     )
 }
+
+const Login = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+`
+
+export default connect(state => ({
+    token: state.login.token,
+    isLoggingIn: state.login.isLoggingIn,
+    loginError: state.login.loginError,
+    isLoggedIn: state.login.isLoggedIn,
+    registerSuccesful: state.login.registerSuccesful,
+    isRegistering: state.login.isRegistering,
+    registerError: state.login.registerError
+
+}), {
+    doLogin,
+    doRegister
+})(LoginView)
