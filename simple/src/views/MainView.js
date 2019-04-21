@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import Header from '../components/Header';
 import ProjectCard from '../components/ProjectCard'
-import data from '../dummy-data';
+import {projects as data} from "../dummy-data";
 
 function MainView(props){
     const [projects, setProjects] = useState([])

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Header from "../components/Header.js";
 import LargeCarousel from "../components/LargeCarousel.js";
 
-import data from "../dummy-data";
+import {projects as data} from "../dummy-data";
 
 export default function(props) {
   const [project, setProject] = useState({});
@@ -15,6 +15,11 @@ export default function(props) {
 
   if (!project) {
     return <div>Somethings wrong with your project</div>;
+  }
+
+  const toContractor = event => {
+      event.preventDefault();
+      props.history.push(`/contractors/${project.contractor_id}`)
   }
 
   console.log(project);
@@ -38,7 +43,7 @@ export default function(props) {
               towards a streamlined cloud solution. User generated content in
               real-time will have multiple touchpoints for offshoring.
             </p>
-            <button className="contact">Contact {project.contractor}</button>
+            <button className="contact" onClick={toContractor}>Contact {project.contractor}</button>
           </div>
           <div className="clientInfo info infoRight">
             <h3>{project.client}</h3>
