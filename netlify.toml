@@ -1,0 +1,9 @@
+[build]
+base = "/simple/"
+publish = "/simple/build/"
+command = "yarn build"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
