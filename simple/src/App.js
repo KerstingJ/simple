@@ -13,7 +13,7 @@ export default function(props){
       {/* <Route path="/login" component={Login}/>
       <Route path="/register" component={Login} register={true}/> */}
       <Route exact path="/" component={MainView} />
-      <Route path="/project/:id" component={ProjectView} />
+      <Route path="/projects/:id" component={ProjectView} />
       <Route path="/addProject" component={MainView} />
     </div>
   );

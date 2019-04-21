@@ -1,9 +1,10 @@
 import React, {useState} from "react";
+import { withRouter } from 'react-router-dom';
 import styled from "styled-components";
 
 import CardCarousel from './CardCarousel';
 
-export default function ProjectCard(props) {
+export default withRouter(function ProjectCard(props) {
   let { project } = props;
   const [hasVoted, setHasVoted] = useState(0);
 
@@ -13,6 +14,11 @@ export default function ProjectCard(props) {
 
   const voteDown = event => {
     setHasVoted(hasVoted < 0 ? 0 : -1)
+  }
+
+  const navButton = event => {
+    event.preventDefault();
+    props.history.push(`/projects/${project.id}`)
   }
 
   return (
@@ -43,12 +49,12 @@ export default function ProjectCard(props) {
           <p className="quote">
             "Incredibly Professional", "Super Responsive", "They Saved My Cat"
           </p>
-          <button className="more">See More</button>
+          <button className="more" onClick={navButton}>See More</button>
         </div>
       </div>
     </CardContainer>
   );
-}
+})
 
 const CardContainer = styled.div`
   display: flex;

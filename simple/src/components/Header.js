@@ -24,6 +24,7 @@ export default withRouter(function(props){
 })
 
 const Header = styled.header`
+    height: 55px;
     width: 100%;
     background: #4abdac;
     color: white;
