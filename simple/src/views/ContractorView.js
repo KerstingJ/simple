@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Header from "../components/Header";
+import SmallProjectCard from "../components/SmallProjectCard";
 
 import { contractors as data } from "../dummy-data.js";
 import { getMostOccuring } from "../utils/ArrayManip.js";
@@ -26,15 +27,15 @@ export default function(props) {
       <Container>
         <div className="contractorInfo">
           <img alt="contractor profile" src={contractor.image} />
-          <div className="infoContent">
+          <div>
             {/* Contractor Name */}
-            <h2>Contact Info: </h2>
+            <h2 className="contact">Contact Info: </h2>
             {/* Phone */}
-            <p>{contractor.phone}</p>
+            <a className="contactBtn" href={`tel:${contractor.phone}`}>{contractor.phone}</a>
             {/* email */}
-            <p>{contractor.email}</p>
+            <a className="contactBtn" href={`mailto:${contractor.email}`}>{contractor.email}</a>
             {/* address */}
-            <p>{contractor.address}</p>
+            <a className="contactBtn">{contractor.address}</a>
             {/* Hours */}
           </div>
         </div>
@@ -56,7 +57,7 @@ export default function(props) {
                       (total, current) => total + current.rating,
                       0
                     ) / projects.length
-                  ).toFixed(2)}
+                  ).toFixed(2)} Stars
                 </strong>
               </p>
             )}
@@ -73,6 +74,8 @@ export default function(props) {
                 </strong>
               </p>
             )}
+            </div>
+            <div className="infoBox">
             {/* common project tags */}
             <h4>Most Used Tags: </h4>
             {projects &&
@@ -82,7 +85,9 @@ export default function(props) {
                 </span>
               ))}
           </div>
-          <div className="recentProjects infoBox">{/* project cards? */}</div>
+          <div className="recentProjects">{/* project cards? */}
+            {projects && projects.sort((x, y) => x.votes > y.votes ? -1 : 1).map(project => <SmallProjectCard key={project.id} project={project} />)}
+          </div>
         </div>
       </Container>
     </>
@@ -94,9 +99,42 @@ const Container = styled.div`
   padding-top: 70px;
   margin: 0 auto;
   display: flex;
+  justify-content: center;
+
+  .contractorInfo {
+    max-width: 200px;
+
+    h2.contact{
+      padding-left: 10px
+    }
+  }
 
   img {
-    max-width: 300px;
+    max-width: 200px;
+  }
+
+  .contactBtn {
+    display: inline-block;
+    padding: 10px;
+    margin: 6px 0;
+    width: 100%;
+
+    background: #4abdac;
+    color: white;
+
+    border-radius: 3px;
+    border: 2px solid #4abdac;
+
+    box-shadow: 2px 2px 1px rgba(0,0,0,0.4);
+
+    transition: .25s;
+
+    &:hover {
+      text-decoration: none;
+      /* background: white;
+      color: #4abdac; */
+      box-shadow: 0px 0px 1px rgba(0,0,0,0.4);
+    }
   }
 
   .projectInfo {
@@ -104,6 +142,7 @@ const Container = styled.div`
       border-left: 3px solid #4abdac;
       margin-left: 20px;
       padding: 10px;
+      margin-bottom: 15px;
 
       p {
         padding-left: 10px;
@@ -115,7 +154,6 @@ const Container = styled.div`
     }
 
     h4 {
-      margin-top: 20px;
       margin-bottom: 10px;
     }
 
@@ -124,7 +162,7 @@ const Container = styled.div`
       padding: 0 7px 2px 7px;
       border-radius: 3px;
       border-bottom: 2px solid grey;
-      border-left: 2px solid grey;
+      border-right: 2px solid grey;
 
       background: #dfdce3;
     }
