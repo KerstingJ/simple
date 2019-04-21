@@ -49,7 +49,7 @@ export default withRouter(function ProjectCard(props) {
           <p className="quote">
             "Incredibly Professional", "Super Responsive", "They Saved My Cat"
           </p>
-          <button className="more" onClick={navButton}>See More</button>
+          <button className="more" onClick={navButton}>View Project</button>
         </div>
       </div>
     </CardContainer>
