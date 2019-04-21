@@ -17,14 +17,15 @@ export default function(props) {
 
   return (
     <CarouselContainer>
-      <button className="btnLeft" onClick={moveLeft}>{`<`}</button>
-      {images.map((img, index) => (
+      {images.length > 1 && <button className="btnLeft" onClick={moveLeft}>{`<`}</button>}
+      {images && images.map((img, index) => (
         <img
+          key={img}
           className={`img${index === active ? ` imgdisplay` : ``}`}
           src={img}
         />
       ))}
-      <button className="btnRight" onClick={moveRight}>{`>`}</button>
+      {images.length > 1 && <button className="btnRight" onClick={moveRight}>{`>`}</button>}
     </CarouselContainer>
   );
 }
@@ -38,7 +39,6 @@ const CarouselContainer = styled.div`
     display: none;
     width: 100%;
     max-width: 500px;
-    height: auto;
     object-fit: cover;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;

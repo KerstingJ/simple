@@ -1,17 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 import CardCarousel from './CardCarousel';
 
 export default function ProjectCard(props) {
   let { project } = props;
+  const [hasVoted, setHasVoted] = useState(0);
+
+  const voteUp = event => {
+    setHasVoted(hasVoted > 0 ? 0 : 1)
+  }
+
+  const voteDown = event => {
+    setHasVoted(hasVoted < 0 ? 0 : -1)
+  }
 
   return (
     <CardContainer>
       <div className="voteBar">
-        <i className="fas fa-chevron-up" />
-        <p>{project.votes}</p>
-        <i className="fas fa-chevron-down" />
+        <div className="up" onClick={voteUp}><i className="fas fa-chevron-up up" /></div>
+        <p className={hasVoted > 0 ? "plus" : hasVoted < 0 ? "minus" : ""}>{project.votes + hasVoted}</p>
+        <div className="down" onClick={voteDown}><i className="fas fa-chevron-down down" /></div>
       </div>
 
       <div className="infoContainer">
@@ -19,14 +28,14 @@ export default function ProjectCard(props) {
         <div className="info">
           <div className="head">
             <h3>{project.contractor}</h3>
-            <h4>{project.client}</h4>
+            <h4>Work For: {project.client}</h4>
             <p>{project.location}</p>
             <div className="rating">
               {[1, 2, 3, 4, 5].map(ech =>
                 ech <= project.rating ? (
                   <i key={ech} className="fas fa-star" />
                 ) : (
-                  <i ley={ech} className="far fa-star" />
+                  <i key={ech} className="far fa-star" />
                 )
               )}
             </div>
@@ -59,10 +68,28 @@ const CardContainer = styled.div`
     svg {
       width: 4rem;
       height: 4rem;
+
+      &.up path:hover {
+        transition: .2s;
+        fill: #4abdac;
+      }
+
+      &.down path:hover {
+        transition: .2s;
+        fill: #fc4a1a;
+      }
     }
 
     p {
       font-size: 2rem;
+    }
+
+    .plus {
+      color: #4abdac;
+    }
+
+    .minus {
+      color: #fc4a1a;
     }
   }
 

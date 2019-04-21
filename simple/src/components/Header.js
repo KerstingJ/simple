@@ -13,10 +13,10 @@ export default withRouter(function(props){
         <Header>
             <div className="container">
                 <h1 onClick={pushHome}>Simple</h1>
-                <input type="search" placeholder="🔎"/>
+                {props.search && <input type="search" placeholder="🔎 Search Tags..."/>}
                 <nav>
-                    <NavLink exact to="/">Home</NavLink>
                     <NavLink to="/"><i className="fas fa-user"></i></NavLink>
+                    <NavLink to="/addProject"><i className="fas fa-plus"></i></NavLink>
                 </nav>
             </div>
         </Header>

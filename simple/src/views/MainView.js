@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components'
 import {connect} from 'react-redux';
 
@@ -7,20 +7,16 @@ import ProjectCard from '../components/ProjectCard'
 import data from '../dummy-data';
 
 function MainView(props){
+    const [projects, setProjects] = useState([])
+
     useEffect(()=>{
+        setProjects(data)
     }, [])
 
     return (<>
-        <Header />
+        <Header search/>
         <Container>
-            <ProjectCard project={data[0]} />
-            <ProjectCard project={data[0]} />
-            <ProjectCard project={data[0]} />
-            <ProjectCard project={data[0]} />
-            <ProjectCard project={data[0]} />
-            <ProjectCard project={data[0]} />
-            <ProjectCard project={data[0]} />
-            <ProjectCard project={data[0]} />
+            {projects.sort((x, y) => x.votes > y.votes ? -1 : 1).map(project => <ProjectCard key={project.id} project={project} />)}
         </Container>
     </>)
 }
