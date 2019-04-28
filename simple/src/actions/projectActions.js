@@ -40,7 +40,7 @@ export const getProjectsListByTag = tag => dispatch => {
     dispatch({
         type: GET_PROJECTS_LIST_BY_TAG,
         payload: {
-            list: projects.filter(p => p.tags.includes(tag)),
+            list: projects.filter(p => p.tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())),
             filter: tag
         }
     })
