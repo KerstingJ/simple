@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import {connect} from 'react-redux';
 import Header from "../components/Header.js";
 import LargeCarousel from "../components/LargeCarousel.js";
 
-import {projects as data} from "../dummy-data";
+import { getProjectById } from '../actions/projectActions.js';
 
 function ProjectView(props) {
-  const [project, setProject] = useState({});
+  const {project} = props;
 
   useEffect(() => {
     let id = props.match.params.id;
-    setProject(data.find(d => d.id + "" === id + ""));
+    props.getProjectById(id);
   }, []);
 
   if (!project) {
-    return <div>Somethings wrong with your project</div>;
+    return <div>Loading your project</div>;
   }
 
   const toContractor = event => {
@@ -75,7 +75,9 @@ function ProjectView(props) {
 }
 
 export default connect(state => ({
+  project: state.projects.activeProject
 }), {
+  getProjectById
 })(ProjectView)
 
 const Container = styled.div`

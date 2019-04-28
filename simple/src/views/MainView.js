@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components'
 import {connect} from 'react-redux';
 
@@ -6,7 +6,6 @@ import Header from '../components/Header';
 import ProjectCard from '../components/ProjectCard'
 
 import { getProjectsList } from '../actions/projectActions.js';
-import {projects as data} from "../dummy-data";
 
 function MainView(props){
     const {projectsList: projects} = props;

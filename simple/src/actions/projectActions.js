@@ -1,4 +1,4 @@
-import axios from '../utils/axiosWithExtra';
+//import axios from '../utils/axiosWithExtra';
 
 import {projects} from '../dummy-data';
 
@@ -39,7 +39,8 @@ export const GET_PROJECT_FAILURE = "GET_PROJECT_FAILURE"
 
 export const getProjectById = id => dispatch => {
     dispatch({
-        type: GET_PROJECT
+        type: GET_PROJECT,
+        payload: projects.find(p => p.id+"" === id+"")
     })
 
     // return axios
