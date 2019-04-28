@@ -31,6 +31,45 @@ export const getProjectsList = () => dispatch => {
     //     })
 }
 
+// GET_PROJECTS_LIST_BY_TAG, GET_PROJECTS_LIST_BY_TAG_SUCCESS, GET_PROJECTS_LIST_BY_TAG_FAILURE
+export const GET_PROJECTS_LIST_BY_TAG = "GET_PROJECTS_LIST_BY_TAG"
+export const GET_PROJECTS_LIST_BY_TAG_SUCCESS = "GET_PROJECTS_LIST_BY_TAG_SUCCESS"
+export const GET_PROJECTS_LIST_BY_TAG_FAILURE = "GET_PROJECTS_LIST_BY_TAG_FAILURE"
+
+export const getProjectsListByTag = tag => dispatch => {
+    dispatch({
+        type: GET_PROJECTS_LIST_BY_TAG,
+        payload: {
+            list: projects.filter(p => p.tags.includes(tag)),
+            filter: tag
+        }
+    })
+
+    // return axios
+    //     .get('projects')
+    //     .then(res => {
+    //         dispatch({
+    //             type: GET_PROJECTS_LIST_BY_TAG_SUCCESS,
+    //             payload: res.data
+    //         })
+    //     })
+    //     .catch(err => {
+    //         console.log("Error Getting Projects List", err)
+    //         dispatch({
+    //             type: GET_PROJECTS_LIST_BY_TAG_FAILURE,
+    //             payload: err
+    //         })
+    //     })
+}
+
+export const CLEAR_FILTER = "CLEAR_FILTER";
+
+export const clearFilter = () => dispatch => {
+    dispatch({
+        type: CLEAR_FILTER
+    })
+}
+
 
 // GET_PROJECT, GET_PROJECT_SUCCESS, GET_PROJECT_FAILURE
 export const GET_PROJECT = "GET_PROJECT"

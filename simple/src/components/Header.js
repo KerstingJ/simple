@@ -1,18 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink, withRouter } from "react-router-dom";
+import {connect} from 'react-redux';
 
-export default withRouter(function(props) {
+import {getProjectsListByTag, clearFilter} from '../actions/projectActions';
+
+const HeaderComponent = withRouter(function(props) {
   const pushHome = event => {
     console.log(props.history.push("/projects"));
   };
+
+  const handleChange = event => {
+    let searchValue = event.target.value;
+    if (!searchValue) {
+      props.clearFilter();
+    } else {
+      props.getProjectsListByTag(searchValue);
+    }
+  }
 
   return (
     <Header>
       <div className="container">
         <h1 onClick={pushHome}>Simple</h1>
         {props.search && (
-          <input type="search" placeholder="🔎 Search Tags..." />
+          <input onChange={handleChange} type="search" placeholder="🔎 Search Tags..." />
         )}
         {props.nav && (
           <nav>
@@ -28,6 +40,11 @@ export default withRouter(function(props) {
     </Header>
   );
 });
+
+export default connect(null, {
+  getProjectsListByTag,
+  clearFilter
+})(HeaderComponent);
 
 const Header = styled.header`
   height: 55px;

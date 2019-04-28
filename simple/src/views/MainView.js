@@ -8,7 +8,8 @@ import ProjectCard from '../components/ProjectCard'
 import { getProjectsList } from '../actions/projectActions.js';
 
 function MainView(props){
-    const {projectsList: projects} = props;
+    
+    const projects = props.filteredList.length > 0 ? props.filteredList : props.projectsList;
 
     useEffect(()=>{
         props.getProjectsList();
@@ -23,7 +24,8 @@ function MainView(props){
 }
 
 export default connect(state => ({
-    projectsList: state.projects.projectsList
+    projectsList: state.projects.projectsList,
+    filteredList: state.projects.filteredList
 }), {
     getProjectsList
 })(MainView)
