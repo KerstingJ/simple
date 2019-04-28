@@ -12,7 +12,7 @@ export default withRouter(function ProjectCard(props) {
 
   return (
     <CardContainer>
-      <img className="cardImg" src={`../${project.images[0]}`} />
+      <img alt="default" className="cardImg" src={`../${project.images[0]}`} />
       <div className="info">
         <div className="head">
           <h4>Done For: {project.client}</h4>

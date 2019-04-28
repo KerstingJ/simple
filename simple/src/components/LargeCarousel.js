@@ -20,6 +20,7 @@ export default function(props) {
       {images.length > 1 && <button className="btnLeft" onClick={moveLeft}>{`<`}</button>}
       {images && images.map((img, index) => (
         <img
+          alt="cetail of project"
           key={img}
           className={`img${index === active ? ` imgdisplay` : ``}`}
           src={`../${img}`}

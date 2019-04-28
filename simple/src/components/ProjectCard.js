@@ -1,36 +1,42 @@
-import React, {useState} from "react";
-import { withRouter } from 'react-router-dom';
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 
-import CardCarousel from './CardCarousel';
+import CardCarousel from "./CardCarousel";
 
 export default withRouter(function ProjectCard(props) {
   let { project } = props;
   const [hasVoted, setHasVoted] = useState(0);
 
   const voteUp = event => {
-    setHasVoted(hasVoted > 0 ? 0 : 1)
-  }
+    setHasVoted(hasVoted > 0 ? 0 : 1);
+  };
 
   const voteDown = event => {
-    setHasVoted(hasVoted < 0 ? 0 : -1)
-  }
+    setHasVoted(hasVoted < 0 ? 0 : -1);
+  };
 
   const navButton = event => {
     event.preventDefault();
-    props.history.push(`/projects/${project.id}`)
-  }
+    props.history.push(`/projects/${project.id}`);
+  };
 
   return (
     <CardContainer>
       <div className="voteBar">
-        <div className="up" onClick={voteUp}><i className="fas fa-chevron-up up" /></div>
-        <p className={hasVoted > 0 ? "plus" : hasVoted < 0 ? "minus" : ""}>{project.votes + hasVoted}</p>
-        <div className="down" onClick={voteDown}><i className="fas fa-chevron-down down" /></div>
+        <div className="up" onClick={voteUp}>
+          <i className="fas fa-chevron-up up" />
+        </div>
+        <p className={hasVoted > 0 ? "plus" : hasVoted < 0 ? "minus" : ""}>
+          {project.votes + hasVoted}
+        </p>
+        <div className="down" onClick={voteDown}>
+          <i className="fas fa-chevron-down down" />
+        </div>
       </div>
 
       <div className="infoContainer">
-        <CardCarousel images={project.images}/>
+        <CardCarousel images={project.images} />
         <div className="info">
           <div className="head">
             <h3>{project.contractor}</h3>
@@ -46,15 +52,22 @@ export default withRouter(function ProjectCard(props) {
               )}
             </div>
           </div>
-          <p className="quote">
-            "Incredibly Professional", "Super Responsive", "They Saved My Cat"
+          <p className="tags">
+            {project &&
+              project.tags.map(tag => (
+                <span key={tag} className="tag">
+                  {tag}
+                </span>
+              ))}
           </p>
-          <button className="more" onClick={navButton}>View Project</button>
+          <button className="more" onClick={navButton}>
+            View Project
+          </button>
         </div>
       </div>
     </CardContainer>
   );
-})
+});
 
 const CardContainer = styled.div`
   display: flex;
@@ -67,6 +80,25 @@ const CardContainer = styled.div`
   position: relative;
   left: -10px;
 
+  .tags {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-left: -5px;
+
+    .tag {
+      margin: 3px 5px;
+      padding: 0 7px 2px 7px;
+      border-radius: 3px;
+      border-bottom: 2px solid grey;
+      border-right: 2px solid grey;
+      font-size: 1.3rem;
+
+      background: #dfdce3;
+    }
+  }
+
   .voteBar {
     text-align: center;
     padding: 20px;
@@ -76,12 +108,12 @@ const CardContainer = styled.div`
       height: 4rem;
 
       &.up path:hover {
-        transition: .2s;
+        transition: 0.2s;
         fill: #4abdac;
       }
 
       &.down path:hover {
-        transition: .2s;
+        transition: 0.2s;
         fill: #fc4a1a;
       }
     }
@@ -114,6 +146,7 @@ const CardContainer = styled.div`
   .info {
     padding: 15px;
     display: flex;
+    width: 80%;
     flex-direction: column;
     justify-content: space-between;
 
@@ -125,26 +158,26 @@ const CardContainer = styled.div`
     margin: 3px;
 
     &:first-child {
-        margin-left: 0;
+      margin-left: 0;
     }
 
     path {
-          fill: #f7b733;
+      fill: #f7b733;
     }
   }
 
   .more {
-      background: #4abdac;
-      color: white;
-      border: 2px solid #41bdac;
-      box-shadow: 2px 2px 1px rgba(0,0,0,0.3);
+    background: #4abdac;
+    color: white;
+    border: 2px solid #41bdac;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
 
-      transition: .35s;
+    transition: 0.35s;
 
-      &:hover {
-        background: white;
-        color: #4abdac;
-        box-shadow: 0px 0px 1px rgba(0,0,0,0.3);
-      }
+    &:hover {
+      background: white;
+      color: #4abdac;
+      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+    }
   }
 `;

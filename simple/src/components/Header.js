@@ -2,11 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink, withRouter } from "react-router-dom";
 
-import { theme } from "../config";
-
 export default withRouter(function(props) {
   const pushHome = event => {
-    console.log(props.history.push("/"));
+    console.log(props.history.push("/projects"));
   };
 
   return (

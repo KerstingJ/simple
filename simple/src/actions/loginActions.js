@@ -1,4 +1,4 @@
-import axios from '../utils/axiosWithExtra';
+import axios from 'axios';
 import {AUTH_TOKEN} from '../config.js'
 
 

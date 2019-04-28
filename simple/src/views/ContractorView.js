@@ -35,7 +35,7 @@ export default function(props) {
             {/* email */}
             <a className="contactBtn" href={`mailto:${contractor.email}`}>{contractor.email}</a>
             {/* address */}
-            <a className="contactBtn">{contractor.address}</a>
+            <span className="contactBtn">{contractor.address}</span>
             {/* Hours */}
           </div>
         </div>

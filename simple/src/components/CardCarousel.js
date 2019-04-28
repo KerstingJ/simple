@@ -20,6 +20,7 @@ export default function(props) {
       {images.length > 1 && <button className="btnLeft" onClick={moveLeft}>{`<`}</button>}
       {images && images.map((img, index) => (
         <img
+          alt="project detail"
           key={img}
           className={`img${index === active ? ` imgdisplay` : ``}`}
           src={img}
@@ -42,6 +43,7 @@ const CarouselContainer = styled.div`
     object-fit: cover;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    margin-left: -29px;
 
     &.imgdisplay {
       display: unset;
@@ -49,7 +51,7 @@ const CarouselContainer = styled.div`
   }
 
   button {
-    position: absolute;
+    position: relative;
     background: rgba(124,124,124,0.4);
     color: white;
     /* text-shadow: 1px 1px 0 white; */
@@ -59,11 +61,11 @@ const CarouselContainer = styled.div`
     padding: .5rem .9rem;
 
     &.btnLeft{
-        left: 15%;
+        left: 4%;
     }
 
     &.btnRight{
-        right: 50%;
+        right: 10%;
     }
 
   }
