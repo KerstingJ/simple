@@ -4,13 +4,15 @@ import {connect} from 'react-redux';
 
 import Header from '../components/Header';
 import ProjectCard from '../components/ProjectCard'
+
+import { getProjectsList } from '../actions/projectActions.js';
 import {projects as data} from "../dummy-data";
 
 function MainView(props){
-    const [projects, setProjects] = useState([])
+    const {projectsList: projects} = props;
 
     useEffect(()=>{
-        setProjects(data)
+        props.getProjectsList();
     }, [])
 
     return (<>
@@ -22,7 +24,9 @@ function MainView(props){
 }
 
 export default connect(state => ({
+    projectsList: state.projects.projectsList
 }), {
+    getProjectsList
 })(MainView)
 
 const Container = styled.div`

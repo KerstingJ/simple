@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import {connect} from 'react-redux';
 import Header from "../components/Header.js";
 import LargeCarousel from "../components/LargeCarousel.js";
 
 import {projects as data} from "../dummy-data";
 
-export default function(props) {
+function ProjectView(props) {
   const [project, setProject] = useState({});
 
   useEffect(() => {
@@ -72,6 +73,10 @@ export default function(props) {
     </>
   );
 }
+
+export default connect(state => ({
+}), {
+})(ProjectView)
 
 const Container = styled.div`
   max-width: 1000px;
