@@ -14,7 +14,7 @@ function MainView(props){
     }, [])
 
     return (<>
-        <Header search/>
+        <Header search nav/>
         <Container>
             {projects.sort((x, y) => x.votes > y.votes ? -1 : 1).map(project => <ProjectCard key={project.id} project={project} />)}
         </Container>

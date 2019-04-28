@@ -23,7 +23,7 @@ export default function(props) {
   console.log(contractor);
   return (
     <>
-      <Header />
+      <Header nav/>
       <Container>
         <div className="contractorInfo">
           <img alt="contractor profile" src={contractor.image} />

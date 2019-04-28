@@ -25,7 +25,7 @@ export default function(props) {
   console.log(project);
   return (
     <>
-      <Header />
+      <Header nav/>
       <Container>
         {project.images && <LargeCarousel images={project.images} />}
         <div className="infoSection">
