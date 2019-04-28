@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import {connect} from 'react-redux';
 
 import Header from "../components/Header";
 import SmallProjectCard from "../components/SmallProjectCard";
 
-import { contractors as data } from "../dummy-data.js";
+import { getContractorById } from '../actions/contractorsActions'
 import { getMostOccuring } from "../utils/ArrayManip.js";
 
-export default function(props) {
-  const [contractor, setContractor] = useState({});
-  const { projects } = contractor;
+function ContractorView(props) {
+  const { contractor } = props;
+  const { projects } = contractor || undefined;
 
   useEffect(() => {
     let id = props.match.params.id;
-    setContractor(data.find(c => c.id + "" === id + ""));
+    props.getContractorById(id);
   }, []);
 
   if (!contractor) {
     return <div>Loading</div>;
   }
 
-  console.log(contractor);
   return (
     <>
       <Header nav/>
@@ -93,6 +93,12 @@ export default function(props) {
     </>
   );
 }
+
+export default connect(state => ({
+  contractor: state.contractors.activeContractor
+}), {
+  getContractorById
+})(ContractorView);
 
 const Container = styled.div`
   max-width: 1000px;
