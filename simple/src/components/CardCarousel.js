@@ -17,24 +17,35 @@ export default function(props) {
 
   return (
     <CarouselContainer>
-      {images.length > 1 && <button className="btnLeft" onClick={moveLeft}>{`<`}</button>}
-      {images && images.map((img, index) => (
-        <img
-          alt="project detail"
-          key={img}
-          className={`img${index === active ? ` imgdisplay` : ``}`}
-          src={img}
-        />
-      ))}
-      {images.length > 1 && <button className="btnRight" onClick={moveRight}>{`>`}</button>}
+      {images.length > 1 && (
+        <button className="btnLeft" onClick={moveLeft}>{`<`}</button>
+      )}
+      {images &&
+        images.map((img, index) => (
+          <img
+            alt="project detail"
+            key={img}
+            className={`img${index === active ? ` imgdisplay` : ``}`}
+            src={img}
+          />
+        ))}
+      {images.length > 1 && (
+        <button className="btnRight" onClick={moveRight}>{`>`}</button>
+      )}
     </CarouselContainer>
   );
 }
 
 const CarouselContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 750px) {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    overflow: none;
+    width: 100%;
+  }
 
   .img {
     display: none;
@@ -45,6 +56,15 @@ const CarouselContainer = styled.div`
     border-bottom-left-radius: 5px;
     margin-left: -29px;
 
+    @media (max-width: 750px) {
+      width: 100%;
+      height: auto;
+      max-width: none;
+      border-top-right-radius: 5px;
+      border-bottom-left-radius: 2px;
+      margin-left: unset;
+    }
+
     &.imgdisplay {
       display: unset;
     }
@@ -52,21 +72,33 @@ const CarouselContainer = styled.div`
 
   button {
     position: relative;
-    background: rgba(124,124,124,0.4);
+    background: rgba(124, 124, 124, 0.4);
     color: white;
     /* text-shadow: 1px 1px 0 white; */
     border-radius: 25px;
     border: 1px solid white;
     /* box-shadow: 1px 1px 0 white; */
-    padding: .5rem .9rem;
+    padding: 0.5rem 0.9rem;
 
-    &.btnLeft{
-        left: 4%;
+    @media (max-width: 750px) {
+      position: absolute;
     }
 
-    &.btnRight{
-        right: 10%;
+    &.btnLeft {
+      left: 4%;
+      @media (max-width: 750px) {
+        left: 20%;
+      }
+      @media (max-width: 500px) {
+        left: 5%;
+      }
     }
 
+    &.btnRight {
+      right: 13%;
+      @media (max-width: 750px) {
+        right: 5%;
+      }
+    }
   }
 `;

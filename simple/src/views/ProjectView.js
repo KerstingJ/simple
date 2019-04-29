@@ -93,6 +93,12 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+
+    @media (max-width: 750px) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
   }
 
   .info {
@@ -100,6 +106,9 @@ const Container = styled.div`
     border-left: 5px solid #4abdac;
     padding-left: 15px;
     width: 50%;
+    @media (max-width: 750px) {
+      width: 90%;
+    }
   }
 
   .rating svg {
@@ -124,6 +133,10 @@ const Container = styled.div`
     box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
 
     transition: 0.35s;
+
+    @media (max-width: 750px) {
+      width: 100%;
+    }
 
     &:hover {
       background: white;

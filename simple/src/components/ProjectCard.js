@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 import CardCarousel from "./CardCarousel";
@@ -9,10 +9,12 @@ export default withRouter(function ProjectCard(props) {
   const [hasVoted, setHasVoted] = useState(0);
 
   const voteUp = event => {
+    event.preventDefault();
     setHasVoted(hasVoted > 0 ? 0 : 1);
   };
 
   const voteDown = event => {
+    event.preventDefault();
     setHasVoted(hasVoted < 0 ? 0 : -1);
   };
 
@@ -23,7 +25,8 @@ export default withRouter(function ProjectCard(props) {
 
   return (
     <CardContainer>
-      <div className="voteBar">
+      {/* Voting for larger views */}
+      <div className="voteBar tabletPlus">
         <div className="up" onClick={voteUp}>
           <i className="fas fa-chevron-up up" />
         </div>
@@ -35,11 +38,30 @@ export default withRouter(function ProjectCard(props) {
         </div>
       </div>
 
+      {/* main container */}
       <div className="infoContainer">
+
         <CardCarousel images={project.images} />
+
+        {/* Voting for mobile views */}
+        <div className="voteBar mobile">
+          <div className="up" onClick={voteUp}>
+            <i className="fas fa-chevron-up up" />
+          </div>
+          <p className={hasVoted > 0 ? "plus" : hasVoted < 0 ? "minus" : ""}>
+            {project.votes + hasVoted}
+          </p>
+          <div className="down" onClick={voteDown}>
+            <i className="fas fa-chevron-down down" />
+          </div>
+        </div>
+
+        {/* Contractor Info */}
         <div className="info">
           <div className="head">
-            <h3>{project.contractor}</h3>
+            <Link to={`/contractors/${project.contractor_id}`}>
+              <h3>{project.contractor}</h3>
+            </Link>
             <h4>Work For: {project.client}</h4>
             <p>{project.location}</p>
             <div className="rating">
@@ -80,6 +102,14 @@ const CardContainer = styled.div`
   position: relative;
   left: -10px;
 
+  @media (max-width: 750px) {
+    left: unset;
+  }
+
+  @media (max-width: 500px) {
+    margin: 15px;
+  }
+
   .tags {
     display: flex;
     justify-content: flex-start;
@@ -102,6 +132,22 @@ const CardContainer = styled.div`
   .voteBar {
     text-align: center;
     padding: 20px;
+
+    &.tabletPlus {
+      @media (max-width: 500px) {
+        display: none;
+      }
+    }
+
+    &.mobile {
+      display: none;
+      @media (max-width: 500px) {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px 10px 0;
+      }
+    }
 
     svg {
       width: 4rem;
@@ -141,6 +187,12 @@ const CardContainer = styled.div`
     /* border: 1px solid black; */
     border-radius: 6px;
     box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+
+    @media (max-width: 750px) {
+      flex-direction: column;
+      max-height: unset;
+      overflow: unset;
+    }
   }
 
   .info {
@@ -152,6 +204,11 @@ const CardContainer = styled.div`
 
     border-top: 1px solid rgba(0, 0, 0, 0.3);
     border-top-right-radius: 6px;
+
+    @media (max-width: 750px) {
+      border-top: none;
+      width: 100%;
+    }
   }
 
   .rating svg {
@@ -173,6 +230,10 @@ const CardContainer = styled.div`
     box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.3);
 
     transition: 0.35s;
+
+    @media (max-width: 750px) {
+      margin-top: 20px;
+    }
 
     &:hover {
       background: white;
