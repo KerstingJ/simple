@@ -49,7 +49,7 @@ const CarouselContainer = styled.div`
   }
 
   button {
-    position: relative;
+    position: absolute;
     background: rgba(124,124,124,0.4);
     color: white;
     /* text-shadow: 1px 1px 0 white; */
