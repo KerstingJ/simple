@@ -38,13 +38,24 @@ export default withRouter(function ProjectCard(props) {
 const CardContainer = styled.div`
   margin-left: 20px;
   margin-bottom: 20px;
+  padding: 10px;
 
-  border: 1px solid #dfdce3;
+  border-bottom: 2px solid darkgray;
   border-radius: 5px;
   background: #dfdce3;
 
+  @media (max-width: 800px) {
+    margin: 10px;
+    width: 100%;
+  }
+
+  @media (max-width: 500px) {
+    margin: 10px;
+    /* width: 300px; */
+  }
+
   .cardImg {
-    padding: 10px;
+    width: 100%;
     max-width: 100%;
   }
 
@@ -54,9 +65,6 @@ const CardContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-
-    /* border-left: 3px solid #4abdac; */
   }
 
   .rating svg {
