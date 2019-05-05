@@ -1,6 +1,6 @@
 
 export const AUTH_TOKEN = "simpleToken"
-export const BASE_URL = ''
+export const BASE_URL = 'http://localhost:8080/api'
 
 export const theme = {
     main: "#990066",

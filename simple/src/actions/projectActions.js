@@ -1,6 +1,6 @@
-//import axios from '../utils/axiosWithExtra';
+import axios from '../utils/axiosWithExtra';
 
-import {projects} from '../dummy-data';
+import { formatProject } from '../utils/DataCleaning';
 
 
 // GET_PROJECTS_LIST, GET_PROJECTS_LIST_SUCCESS, GET_PROJECTS_LIST_FAILURE
@@ -10,25 +10,29 @@ export const GET_PROJECTS_LIST_FAILURE = "GET_PROJECTS_LIST_FAILURE"
 
 export const getProjectsList = () => dispatch => {
     dispatch({
-        type: GET_PROJECTS_LIST,
-        payload: projects
+        type: GET_PROJECTS_LIST
     })
 
-    // return axios
-    //     .get('projects')
-    //     .then(res => {
-    //         dispatch({
-    //             type: GET_PROJECTS_LIST_SUCCESS,
-    //             payload: res.data
-    //         })
-    //     })
-    //     .catch(err => {
-    //         console.log("Error Getting Projects List", err)
-    //         dispatch({
-    //             type: GET_PROJECTS_LIST_FAILURE,
-    //             payload: err
-    //         })
-    //     })
+    return axios
+        .get('/projects')
+        .then(res => {
+            let projects = [];
+            console.log(res)
+
+            res.data.forEach(p => projects.push(formatProject(p)));
+
+            dispatch({
+                type: GET_PROJECTS_LIST_SUCCESS,
+                payload: projects
+            })
+        })
+        .catch(err => {
+            console.log("Error Getting Projects List", err)
+            dispatch({
+                type: GET_PROJECTS_LIST_FAILURE,
+                payload: err.message
+            })
+        })
 }
 
 // GET_PROJECTS_LIST_BY_TAG, GET_PROJECTS_LIST_BY_TAG_SUCCESS, GET_PROJECTS_LIST_BY_TAG_FAILURE
@@ -40,7 +44,7 @@ export const getProjectsListByTag = tag => dispatch => {
     dispatch({
         type: GET_PROJECTS_LIST_BY_TAG,
         payload: {
-            list: projects.filter(p => p.tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())),
+            list: [], //projects.filter(p => p.tags.map(t => t.toLowerCase()).includes(tag.toLowerCase())),
             filter: tag
         }
     })
@@ -78,25 +82,24 @@ export const GET_PROJECT_FAILURE = "GET_PROJECT_FAILURE"
 
 export const getProjectById = id => dispatch => {
     dispatch({
-        type: GET_PROJECT,
-        payload: projects.find(p => p.id+"" === id+"")
+        type: GET_PROJECT
     })
 
-    // return axios
-    //     .get('projects/:id')
-    //     .then(res => {
-    //         dispatch({
-    //             type: GET_PROJECT_SUCCESS,
-    //             payload: res.data
-    //         })
-    //     })
-    //     .catch(err => {
-    //         console.log("Error Getting Project", err)
-    //         dispatch({
-    //             type: GET_PROJECT_FAILURE,
-    //             payload: err
-    //         })
-    //     })
+    return axios
+        .get(`project/${id}`)
+        .then(res => {
+            dispatch({
+                type: GET_PROJECT_SUCCESS,
+                payload: formatProject(res.data)
+            })
+        })
+        .catch(err => {
+            console.log("Error Getting Project", err)
+            dispatch({
+                type: GET_PROJECT_FAILURE,
+                payload: err.message
+            })
+        })
 }
 
 

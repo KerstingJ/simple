@@ -1,7 +1,7 @@
 import {
-    GET_CONTRACTORS_LIST, GET_CONTRACTORS_LIST_SUCCESS, GET_CONTRACTORS_LIST_FAILURE,
+    GET_CONTRACTORS_LIST, GET_CONTRACTORS_LIST_SUCCESS, GET_CONTRACTORS_LIST_FAILURE, 
+    GET_CONTRACTOR, GET_CONTRACTOR_SUCCESS, GET_CONTRACTOR_FAILURE,
 } from '../actions/contractorsActions'
-import { GET_CONTRACTOR } from '../actions/contractorsActions';
 
 const initialState = {
     contractorsList: [],
@@ -21,14 +21,22 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 error: null,
-                activeContractor: {},
-                contractorsList: action.payload
+                activeContractor: {}
             }
         case GET_CONTRACTOR:
             return {
                 ...state,
-                error: null,
+                error: null
+            }
+        case GET_CONTRACTOR_SUCCESS:
+            return {
+                ...state,
                 activeContractor: action.payload
+            }
+        case GET_CONTRACTOR_FAILURE:
+            return {
+                ...state,
+                error: action.payload
             }
         default:
             return state

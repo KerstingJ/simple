@@ -1,8 +1,8 @@
 import {
     GET_PROJECTS_LIST, GET_PROJECTS_LIST_SUCCESS, GET_PROJECTS_LIST_FAILURE, 
-    GET_PROJECT,
+    GET_PROJECT, GET_PROJECT_SUCCESS, GET_PROJECT_FAILURE,
     GET_PROJECTS_LIST_BY_TAG,
-    CLEAR_FILTER
+    CLEAR_FILTER,
 } from '../actions/projectActions'
 
 const initialState = {
@@ -26,8 +26,34 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 error: null,
-                activeProject: {},
+                activeProject: {}
+            }
+        case GET_PROJECTS_LIST_SUCCESS:
+            return {
+                ...state,
+                error: null,
                 projectsList: action.payload
+            }
+        case GET_PROJECTS_LIST_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            }
+        case GET_PROJECT:
+            return {
+                ...state,
+                error: null
+            }
+        case GET_PROJECT_SUCCESS:
+            return {
+                ...state,
+                error: null,
+                activeProject: action.payload
+            }
+        case GET_PROJECT_FAILURE:
+            return {
+                ...state,
+                error: action.payload
             }
         case GET_PROJECTS_LIST_BY_TAG:
             return {
@@ -40,13 +66,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 filteredList: []
-            }
-        case GET_PROJECT:
-            console.log(action)
-            return {
-                ...state,
-                error: null,
-                activeProject: action.payload
             }
         default:
             return state

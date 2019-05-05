@@ -1,7 +1,6 @@
-//import axios from '../utils/axiosWithExtra';
+import axios from '../utils/axiosWithExtra';
 
-import {contractors} from '../dummy-data';
-
+import {formatContractor} from '../utils/DataCleaning'
 
 // GET_CONTRACTORS_LIST, GET_CONTRACTORS_LIST_SUCCESS, GET_CONTRACTORS_LIST_FAILURE
 export const GET_CONTRACTORS_LIST = "GET_CONTRACTORS_LIST"
@@ -10,8 +9,7 @@ export const GET_CONTRACTORS_LIST_FAILURE = "GET_CONTRACTORS_LIST_FAILURE"
 
 export const getContractorsList = () => dispatch => {
     dispatch({
-        type: GET_CONTRACTORS_LIST,
-        payload: contractors
+        type: GET_CONTRACTORS_LIST
     })
 
     // return axios
@@ -40,24 +38,23 @@ export const GET_CONTRACTOR_FAILURE = "GET_CONTRACTOR_FAILURE"
 export const getContractorById = id => dispatch => {
     dispatch({
         type: GET_CONTRACTOR,
-        payload: contractors.find(c => c.id+"" === id)
     })
 
-    // return axios
-    //     .get('contractors/:id')
-    //     .then(res => {
-    //         dispatch({
-    //             type: GET_CONTRACTOR_SUCCESS,
-    //             payload: res.data
-    //         })
-    //     })
-    //     .catch(err => {
-    //         console.log("Error Getting Contractor", err)
-    //         dispatch({
-    //             type: GET_CONTRACTOR_FAILURE,
-    //             payload: err
-    //         })
-    //     })
+    return axios
+        .get(`contractor/${id}`)
+        .then(res => {
+            dispatch({
+                type: GET_CONTRACTOR_SUCCESS,
+                payload: formatContractor(res.data)
+            })
+        })
+        .catch(err => {
+            console.log("Error Getting Contractor", err)
+            dispatch({
+                type: GET_CONTRACTOR_FAILURE,
+                payload: err.message
+            })
+        })
 }
 
 
