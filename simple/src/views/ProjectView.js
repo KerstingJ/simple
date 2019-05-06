@@ -8,6 +8,7 @@ import { getProjectById } from '../actions/projectActions.js';
 
 function ProjectView(props) {
   const {project} = props;
+  // console.log(JSON.stringify(project));
 
   useEffect(() => {
     let id = props.match.params.id;
@@ -23,7 +24,6 @@ function ProjectView(props) {
       props.history.push(`/contractors/${project.contractor_id}`)
   }
 
-  console.log(project);
   return (
     <>
       <Header nav/>
@@ -38,11 +38,7 @@ function ProjectView(props) {
             </p>
             <h4>Project Details</h4>
             <p>
-              Bring to the table win-win survival strategies to ensure proactive
-              domination. At the end of the day, going forward, a new normal
-              that has evolved from generation X is on the runway heading
-              towards a streamlined cloud solution. User generated content in
-              real-time will have multiple touchpoints for offshoring.
+              {project.details}
             </p>
             <button className="contact" onClick={toContractor}>Contact {project.contractor}</button>
           </div>
@@ -61,11 +57,7 @@ function ProjectView(props) {
             </div>
             <h4>Client Review</h4>
             <p>
-              Bring to the table win-win survival strategies to ensure proactive
-              domination. At the end of the day, going forward, a new normal
-              that has evolved from generation X is on the runway heading
-              towards a streamlined cloud solution. User generated content in
-              real-time will have multiple touchpoints for offshoring.
+              {project.review}
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 
 export const AUTH_TOKEN = "simpleToken"
-export const BASE_URL = 'http://localhost:8080/api'
+export const BASE_URL = 'https://joshk-pioneer-simple.herokuapp.com//api'
 
 export const theme = {
     main: "#990066",

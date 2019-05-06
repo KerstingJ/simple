@@ -1,12 +1,13 @@
-export const formatProject = (input, hasContractor=false) => {
+export const formatProject = (input, hasContractor = false) => {
   let output = {
     id: input.uid,
-    contractor_id: hasContractor? null : input.contractor.uid,
-    contractor: hasContractor? null : input.contractor.name,
+    contractor_id: hasContractor ? null : input.contractor.uid,
+    contractor: hasContractor ? null : input.contractor.name,
     client: input.client,
     location: input.location,
     images: input.images,
     tags: input.tags,
+    details: input.details,
     votes: 5
   };
 
@@ -19,7 +20,6 @@ export const formatProject = (input, hasContractor=false) => {
 };
 
 export const formatContractor = input => {
-
   let output = {
     id: input.uid,
     name: input.name,
@@ -27,26 +27,28 @@ export const formatContractor = input => {
     phone: processPhone(input.phone),
     email: input.email,
     address: input.address,
-    projects: input.projects ? input.projects.map(p => formatProject(p, true)) : null
+    projects: input.projects
+      ? input.projects.map(p => formatProject(p, true))
+      : null
   };
-
-  console.log(JSON.stringify(output));
 
   return output;
 };
 
-function processPhone(number) {
-    let phoneParts = ["000", "000", "0000"];
+function processPhone(phone) {
+  phone = phone + "";
+  let phoneParts = undefined;
 
-    let phone = number ? number + "" : null;
+  try {
+    phoneParts = [
+      phone.slice(0, 3),
+      phone.slice(3, 6),
+      phone.slice(6, phone.length)
+    ];
+  } catch (e) {
+    console.log(e);
+    phoneParts = ["000", "000", "0000"];
+  }
 
-    if (phone && phone.length === 7) {
-      phoneParts = [
-        phone.slice(0, 3),
-        phone.slice(3, 6),
-        phone.slice(6, phone.length)
-      ];
-    }
-
-    return `(${phoneParts[0]}) ${phoneParts[1]}-${phoneParts[2]}`;
+  return `(${phoneParts[0]}) ${phoneParts[1]}-${phoneParts[2]}`;
 }

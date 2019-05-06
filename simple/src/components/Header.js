@@ -8,7 +8,7 @@ import {getProjectsListByTag, clearFilter} from '../actions/projectActions';
 const HeaderComponent = withRouter(function(props) {
   
   const pushHome = event => {
-    console.log(props.history.push("/projects"));
+    props.history.push("/projects");
   };
 
   const handleChange = event => {

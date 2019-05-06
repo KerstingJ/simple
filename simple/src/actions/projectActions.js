@@ -17,7 +17,6 @@ export const getProjectsList = () => dispatch => {
         .get('/projects')
         .then(res => {
             let projects = [];
-            console.log(res)
 
             res.data.forEach(p => projects.push(formatProject(p)));
 
