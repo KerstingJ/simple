@@ -187,6 +187,10 @@ const Container = styled.main`
       height: 50px;
     }
 
+    &:last-of-type {
+      display: none;
+    }
+
     svg {
       fill: white;
       height: 100px;
@@ -269,6 +273,11 @@ const Container = styled.main`
       @media (max-width: 850px) {
         flex-direction: column;
       }
+    }
+
+    &:last-of-type {
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     .spotlight-image {
